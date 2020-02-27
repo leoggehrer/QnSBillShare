@@ -40,11 +40,11 @@ namespace QnSBillShare.Logic.Entities.Business.App
 
         partial void OnNumberOfFriendsReading()
         {
-            _numberOfFriends = BillEntity.Friends != null ? BillEntity.Friends.Split(";").Length : 0;
+            _numberOfFriends = BillEntity.Friends != null ? BillEntity.Friends.Split(",").Length : 0;
         }
         partial void OnFriendsReading()
         {
-            _friends = BillEntity.Friends != null ? BillEntity.Friends.Split(";") : new string[0];
+            _friends = BillEntity.Friends != null ? BillEntity.Friends.Split(",") : new string[0];
         }
         partial void OnFriendPortionReading()
         {

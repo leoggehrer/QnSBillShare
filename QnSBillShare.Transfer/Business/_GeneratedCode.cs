@@ -17,6 +17,7 @@ namespace QnSBillShare.Transfer.Business.App
 		}
 		partial void Constructing();
 		partial void Constructed();
+		[JsonIgnore]
 		public QnSBillShare.Contracts.Persistence.App.IBill Bill
 		{
 			get
@@ -39,6 +40,7 @@ namespace QnSBillShare.Transfer.Business.App
 		partial void OnBillReading();
 		partial void OnBillChanging(ref bool handled, ref QnSBillShare.Contracts.Persistence.App.IBill _bill);
 		partial void OnBillChanged();
+		[JsonIgnore]
 		public System.Collections.Generic.IEnumerable<QnSBillShare.Contracts.Persistence.App.IExpense> Expenses
 		{
 			get
@@ -193,6 +195,7 @@ namespace QnSBillShare.Transfer.Business.App
 		partial void OnFriendAmountsReading();
 		partial void OnFriendAmountsChanging(ref bool handled, ref System.Double[] _friendAmounts);
 		partial void OnFriendAmountsChanged();
+		[JsonIgnore]
 		public System.Collections.Generic.IEnumerable<QnSBillShare.Contracts.Modules.App.IBalance> Balances
 		{
 			get
