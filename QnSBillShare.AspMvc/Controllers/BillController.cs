@@ -16,14 +16,26 @@ namespace QnSBillShare.AspMvc.Controllers
             model.CopyProperties(entity);
             return model;
         }
-        private Contracts.Client.IAdapterAccess<Contracts.Persistence.App.IBill> CreateController()
+        private Models.App.BillExpense ConvertToModel(Contracts.Business.App.IBillExpense entity)
+        {
+            var model = new Models.App.BillExpense();
+
+            model.CopyProperties(entity);
+            return model;
+        }
+        private Contracts.Client.IAdapterAccess<Contracts.Persistence.App.IBill> CreatePersistenceCtrl()
         {
             return Adapters.Factory.Create<Contracts.Persistence.App.IBill>();
         }
+        private Contracts.Client.IAdapterAccess<Contracts.Business.App.IBillExpense> CreateBusinessCtrl()
+        {
+            return Adapters.Factory.Create<Contracts.Business.App.IBillExpense>();
+        }
+    
         // GET: Bill
         public async Task<ActionResult> Index()
         {
-            using var ctrl = CreateController();
+            using var ctrl = CreatePersistenceCtrl();
             var models = (await ctrl.GetAllAsync()).Select(e => ConvertToModel(e));
             return View(models);
         }
@@ -31,7 +43,7 @@ namespace QnSBillShare.AspMvc.Controllers
         // GET: Bill/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            using var ctrl = CreateController();
+            using var ctrl = CreateBusinessCtrl();
             var entity = await ctrl.GetByIdAsync(id);
 
             return View("Details", ConvertToModel(entity));
@@ -40,7 +52,7 @@ namespace QnSBillShare.AspMvc.Controllers
         // GET: Bill/Create
         public async Task<ActionResult> Create()
         {
-            using var ctrl = CreateController();
+            using var ctrl = CreatePersistenceCtrl();
             var model = ConvertToModel(await ctrl.CreateAsync());
             return View("Create", model);
         }
@@ -53,7 +65,7 @@ namespace QnSBillShare.AspMvc.Controllers
             try
             {
                 // TODO: Add insert logic here
-                using var ctrl = CreateController();
+                using var ctrl = CreatePersistenceCtrl();
 
                 await ctrl.InsertAsync(model);
 

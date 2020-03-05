@@ -1,48 +1,43 @@
-﻿@model QnSBillShare.AspMvc.Models.App.Bill
+﻿@model QnSBillShare.AspMvc.Models.App.BillExpense
 
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Detail</h1>
+<h1>Details</h1>
 
 <div>
-    <h4>Bill</h4>
+    <h4>BillExpense</h4>
     <hr />
+
+    @await Html.PartialAsync("BillDetails", Model.Bill)
+
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.TotalExpense)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date)
+            @Html.DisplayFor(model => model.TotalExpense)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.FriendPortion)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.FriendPortion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.NumberOfFriends)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Currency)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Currency)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Friends)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Friends)
+            @Html.DisplayFor(model => model.NumberOfFriends)
         </dd>
     </dl>
+
+  @await Html.PartialAsync("ExpensesDetails", Model.Expenses)
+
+  @await Html.PartialAsync("BalancesDetails", Model.Balances)
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Zurück</a>
+    <a asp-action="Index">Back to List</a>
 </div>
