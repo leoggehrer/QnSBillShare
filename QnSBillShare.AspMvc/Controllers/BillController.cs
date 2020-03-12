@@ -131,7 +131,7 @@ namespace QnSBillShare.AspMvc.Controllers
 
         public ActionResult CreateExpense(int id)
         {
-            return RedirectToAction("Details", new { id });
+            return RedirectToAction("Create", "Expense", new { billId = id });
         }
     }
 }

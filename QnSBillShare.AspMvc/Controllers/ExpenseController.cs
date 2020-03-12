@@ -43,7 +43,10 @@ namespace QnSBillShare.AspMvc.Controllers
             var entity = bill.CreateExpense();
 
             entity.BillId = billId;
-            return View(ConvertToModel(entity));
+            var model = ConvertToModel(entity);
+
+            model.Bill = ConvertToModel(bill.Bill);
+            return View(model);
         }
 
         [HttpPost]
@@ -57,6 +60,7 @@ namespace QnSBillShare.AspMvc.Controllers
                 using var ctrl = CreateBusinessCtrl();
                 var bill = await ctrl.GetByIdAsync(model.BillId);
 
+                model.Bill = ConvertToModel(bill.Bill);
                 bill.Add(model);
                 await ctrl.UpdateAsync(bill);
                 return RedirectToAction("Details", "Bill", new { id = model.BillId });
