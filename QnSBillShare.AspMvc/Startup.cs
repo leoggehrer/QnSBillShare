@@ -27,6 +27,7 @@ namespace QnSBillShare.AspMvc
 #if (DEBUG)
             mvcviews.AddRazorRuntimeCompilation();
 #endif
+            services.AddSingleton<IFactoryWrapper, FactoryWrapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

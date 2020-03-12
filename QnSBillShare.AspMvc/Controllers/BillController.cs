@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace QnSBillShare.AspMvc.Controllers
 {
     public class BillController : Controller
     {
+        private IFactoryWrapper _factoryWrapper;
         private Models.App.Bill ConvertToModel(Contracts.Persistence.App.IBill entity)
         {
             var model = new Models.App.Bill();
@@ -31,7 +33,11 @@ namespace QnSBillShare.AspMvc.Controllers
         {
             return Adapters.Factory.Create<Contracts.Business.App.IBillExpense>();
         }
-    
+
+        public BillController(IFactoryWrapper factoryWrapper)
+        {
+            _factoryWrapper = factoryWrapper;
+        }
         // GET: Bill
         [ActionName("Index")]
         public async Task<ActionResult> IndexAsync()
