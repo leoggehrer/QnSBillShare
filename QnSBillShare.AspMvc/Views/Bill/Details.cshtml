@@ -5,34 +5,35 @@
 }
 
 <h1>Details</h1>
-
+<p>Hallo Maxi</p>
 <div>
-    <h4>BillExpense</h4>
-    <hr />
+  <h4>BillExpense</h4>
+  <hr />
 
-    @await Html.PartialAsync("BillDetails", Model.Bill)
+  @await Html.PartialAsync("BillDetails", Model.Bill)
 
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalExpense)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalExpense)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FriendPortion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FriendPortion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfFriends)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfFriends)
-        </dd>
-    </dl>
+  <dl class="row">
+    <dt class="col-sm-2">
+      @Html.DisplayNameFor(model => model.TotalExpense)
+    </dt>
+    <dd class="col-sm-10">
+      @Html.DisplayFor(model => model.TotalExpense)
+    </dd>
+    <dt class="col-sm-2">
+      @Html.DisplayNameFor(model => model.FriendPortion)
+    </dt>
+    <dd class="col-sm-10">
+      @Html.DisplayFor(model => model.FriendPortion)
+    </dd>
+    <dt class="col-sm-2">
+      @Html.DisplayNameFor(model => model.NumberOfFriends)
+    </dt>
+    <dd class="col-sm-10">
+      @Html.DisplayFor(model => model.NumberOfFriends)
+    </dd>
+  </dl>
 
+  @Html.ActionLink("Add", "CreateExpense", new { id = Model.Id })
   @await Html.PartialAsync("ExpensesDetails", Model.Expenses)
 
   @await Html.PartialAsync("BalancesDetails", Model.Balances)

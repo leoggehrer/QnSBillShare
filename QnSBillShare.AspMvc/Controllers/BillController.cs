@@ -33,7 +33,8 @@ namespace QnSBillShare.AspMvc.Controllers
         }
     
         // GET: Bill
-        public async Task<ActionResult> Index()
+        [ActionName("Index")]
+        public async Task<ActionResult> IndexAsync()
         {
             using var ctrl = CreatePersistenceCtrl();
             var models = (await ctrl.GetAllAsync()).Select(e => ConvertToModel(e));
@@ -41,16 +42,18 @@ namespace QnSBillShare.AspMvc.Controllers
         }
 
         // GET: Bill/Details/5
-        public async Task<ActionResult> Details(int id)
+        [ActionName("Details")]
+        public async Task<ActionResult> DetailsAsync(int id)
         {
             using var ctrl = CreateBusinessCtrl();
             var entity = await ctrl.GetByIdAsync(id);
 
-            return View("Details", ConvertToModel(entity));
+            return View(ConvertToModel(entity));
         }
 
         // GET: Bill/Create
-        public async Task<ActionResult> Create()
+        [ActionName("Create")]
+        public async Task<ActionResult> CreateAsync()
         {
             using var ctrl = CreatePersistenceCtrl();
             var model = ConvertToModel(await ctrl.CreateAsync());
@@ -60,7 +63,8 @@ namespace QnSBillShare.AspMvc.Controllers
         // POST: Bill/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Models.App.Bill model)
+        [ActionName("Create")]
+        public async Task<ActionResult> CreateAsync(Models.App.Bill model)
         {
             try
             {
@@ -78,7 +82,8 @@ namespace QnSBillShare.AspMvc.Controllers
         }
 
         // GET: Bill/Edit/5
-        public ActionResult Edit(int id)
+        [ActionName("Edit")]
+        public ActionResult EditAsync(int id)
         {
             return View();
         }
@@ -86,7 +91,8 @@ namespace QnSBillShare.AspMvc.Controllers
         // POST: Bill/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [ActionName("Edit")]
+        public ActionResult EditAsync(int id, IFormCollection collection)
         {
             try
             {
@@ -121,6 +127,11 @@ namespace QnSBillShare.AspMvc.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult CreateExpense(int id)
+        {
+            return RedirectToAction("Details", new { id });
         }
     }
 }
